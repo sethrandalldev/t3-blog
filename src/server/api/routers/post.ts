@@ -19,6 +19,12 @@ export const postRouter = createTRPCRouter({
       });
     }),
 
+  delete: protectedProcedure.input(z.number()).mutation(({ ctx, input }) => {
+    return ctx.db.post.delete({
+      where: { id: input },
+    });
+  }),
+
   getLatest: protectedProcedure.query(({ ctx }) => {
     return ctx.db.post.findFirst({
       orderBy: { createdAt: "desc" },

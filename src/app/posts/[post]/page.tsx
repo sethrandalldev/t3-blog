@@ -2,6 +2,7 @@ import { api } from "~/trpc/server";
 import { getServerAuthSession } from "~/server/auth";
 import type { Post, User } from "~/types";
 import Link from "next/link";
+import Button from "~/app/_components/button";
 
 type Props = {
   params: {
@@ -38,9 +39,20 @@ export default async function Page({ params }: Props) {
       {renderPost()}
       <br />
       <Link href="/posts">View All Posts</Link>
-      &emsp;|&emsp;
       {session.user.id === post.createdById ? (
-        <Link href={`/posts/${post.id}/edit`}>Edit Post</Link>
+        <div>
+          <Link href={`/posts/${post.id}/edit`}>Edit Post</Link>
+          &emsp;|&emsp;
+          <Button
+            clickHandler={async () => {
+              "use server";
+              await api.post.delete.mutate(post.id);
+            }}
+            route="/posts"
+          >
+            Delete Post
+          </Button>
+        </div>
       ) : null}
     </div>
   ) : (
