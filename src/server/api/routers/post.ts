@@ -34,8 +34,7 @@ export const postRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.db.post.findMany({
-      orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
+      orderBy: { createdAt: "desc" }
     });
   }),
 
@@ -45,4 +44,12 @@ export const postRouter = createTRPCRouter({
       where: { id: isNaN(id) ? -1 : id },
     });
   }),
+
+  getAllByUserId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    const userId = input
+    return ctx.db.post.findMany({
+      orderBy: { createdAt: "desc" },
+      where: { createdBy: { id: userId}}
+    })
+  })
 });
