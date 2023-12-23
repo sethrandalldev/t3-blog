@@ -21,21 +21,21 @@ export default async function Page({ params }: Props) {
 
   // render post name, body, and author name and email
   const renderPost = () => {
-    console.log(post);
-    console.log(session.user);
+    console.log(post)
     return (
       <div>
         <div>
-          <h2 className="text-cyan-50">{post?.name}</h2>
-          <p>Author: {author?.name}</p>
+          <h2 className="text-cyan-50 text-4xl">{post.name}</h2>
+          <p><em>{author?.name}</em></p>
+          <p>{(new Date(post.createdAt)).toLocaleDateString()}</p>
         </div>
-        <p>{post?.body}</p>
+        <p className="py-10">{post?.body}</p>
       </div>
     );
   };
 
   return post ? (
-    <div>
+    <div className="p-5">
       {renderPost()}
       <br />
       <Link href="/posts">View All Posts</Link>
