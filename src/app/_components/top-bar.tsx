@@ -9,6 +9,7 @@ export default async function TopBar() {
         <div>
           <Link className="nav-item m-2" href="/posts">Home</Link>
           <Link className="nav-item m-2" href={`/users/${session?.user.id}`}>Profile</Link>
+          <Link className="nav-item m-2" href="/posts/new">Create Post</Link>
         </div>
         <div className="flex flex-row items-center justify-center gap-4">
           <p className="text-center text-2xl text-white">

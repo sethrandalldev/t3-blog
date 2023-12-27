@@ -30,7 +30,7 @@ async function CrudShowcase() {
           <p>Post body: {latestPost.body}</p>
         </>
       ) : (
-        <p>You have no posts yet.</p>
+        <p>No recent posts available.</p>
       )}
     </div>
   );
