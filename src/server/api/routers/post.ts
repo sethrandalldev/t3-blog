@@ -25,10 +25,12 @@ export const postRouter = createTRPCRouter({
     });
   }),
 
-  getLatest: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.post.findFirst({
+  getLatest: protectedProcedure.input(z.number()).query(({ ctx,input }) => {
+    const postCount = input || 1
+    return ctx.db.post.findMany({
       orderBy: { createdAt: "desc" },
       where: { createdBy: { id: ctx.session.user.id } },
+      take: postCount
     });
   }),
 
