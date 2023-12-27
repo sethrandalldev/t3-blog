@@ -7,7 +7,7 @@ export default async function TopBar() {
     <div className="top-bar m-2">
       <div className="flex flex-row items-center gap-2 justify-between">
         <div>
-          <Link className="nav-item m-2" href="/posts">Home</Link>
+          <Link className="nav-item m-2" href="/">Home</Link>
           <Link className="nav-item m-2" href={`/users/${session?.user.id}`}>Profile</Link>
           <Link className="nav-item m-2" href="/posts/new">Create Post</Link>
         </div>
