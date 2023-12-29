@@ -1,4 +1,5 @@
 import { CreatePost } from "~/app/_components/create-post";
+import PostPreview from "~/app/_components/post-preview";
 import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
 
@@ -26,13 +27,9 @@ async function CrudShowcase() {
   return (
     <div className="w-full max-w-xs">
       {latestPosts ? latestPosts.map(post => {
-        return (
-          <div key={post.id}>
-            <p className="truncate">Latest Post: {post.name}</p>
-            <p>Post body: {post.body}</p>
-          </div>
-        )
-      }) : (
+        return <PostPreview post={post} />;
+        })
+        : (
         <p>No recent posts available.</p>
       )}
     </div>
